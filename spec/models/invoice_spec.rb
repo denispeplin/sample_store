@@ -7,10 +7,9 @@ RSpec.describe Invoice, :type => :model do
         @invoice = create :invoice, received: true
       end
 
-      it "doesn't mark itself as received" do
-        updated_at = @invoice.updated_at
-        @invoice.receive!
-        expect(@invoice.updated_at).to eq updated_at
+      it "doesn't calls receive! when marked as received" do
+        expect(@invoice).to_not receive(:receive!)
+        @invoice.update_attributes(received: true)
       end
 
       it "doesn't calls copy on its products" do
@@ -25,9 +24,9 @@ RSpec.describe Invoice, :type => :model do
         @invoice = create :invoice
       end
 
-      it 'marks itself as received' do
-        @invoice.receive!
-        expect(@invoice).to be_received
+      it "calls receive! when marked as received" do
+        expect(@invoice).to receive(:receive!)
+        @invoice.update_attributes(received: true)
       end
 
       it "calls copy on all of its products" do
