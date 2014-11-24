@@ -83,6 +83,7 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  config.raise_errors_for_deprecations!
 
   config.include FactoryGirl::Syntax::Methods
 end

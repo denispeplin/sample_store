@@ -8,13 +8,13 @@ RSpec.describe InvoiceProduct, :type => :model do
     end
 
     it "creates new, when product with the same name doesn't exists" do
-      @invoice_product.attributes.extract!('name', 'amount', 'price').
-        should == Product.last.attributes.extract!('name', 'amount', 'price')
+      expect(@invoice_product.attributes.extract!('name', 'amount', 'price'))
+      .to eq Product.last.attributes.extract!('name', 'amount', 'price')
     end
 
     it "increases amount, when product with the same name does exists" do
       @invoice_product.copy
-      Product.last.amount.should == @invoice_product.amount * 2
+      expect(Product.last.amount).to eq @invoice_product.amount * 2
     end
   end
 end
