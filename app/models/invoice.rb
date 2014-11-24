@@ -1,5 +1,8 @@
 class Invoice < ActiveRecord::Base
   has_many :invoice_products
+
+  default_scope { order(:received, created_at: :desc) }
+
   before_save :receive!, if: lambda { |invoice| invoice.received_changed? and invoice.received }
 
   def receive!
