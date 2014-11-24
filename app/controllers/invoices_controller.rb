@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
   def index
-    render json: Invoice.all
+    render json: Invoice.includes(:invoice_products).all
   end
 
   def update
