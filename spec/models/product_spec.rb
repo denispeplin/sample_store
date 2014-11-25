@@ -8,7 +8,7 @@ RSpec.describe Product, :type => :model do
   shared_examples "movable to order" do
     before :each do
       @order = create :order
-      @product.sell 5
+      @product.order 5
     end
 
     context "adds itself to order" do
@@ -37,7 +37,7 @@ RSpec.describe Product, :type => :model do
   context "when no opened order" do
     context "creates order" do
       before :each do
-        @product.sell 5
+        @product.order 5
       end
 
       after :each do
@@ -57,13 +57,13 @@ RSpec.describe Product, :type => :model do
 
   context "after being reserved" do
     it "sells itself when reserved in numbers between 1 and #amount" do
-      expect(@product).to receive(:sell)
+      expect(@product).to receive(:order)
       @product.update_attributes(reserve: 5)
     end
 
     context "refuses to sell with wrong reserve numbers" do
       before :each do
-        expect(@product).to_not receive(:sell)
+        expect(@product).to_not receive(:order)
       end
 
       it "when sell amount too big" do
