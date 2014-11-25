@@ -12,4 +12,8 @@ class Product < ActiveRecord::Base
       save!
     end
   end
+
+  def reserve=(sell_amount)
+    sell sell_amount if sell_amount >= 1 and sell_amount <= amount
+  end
 end

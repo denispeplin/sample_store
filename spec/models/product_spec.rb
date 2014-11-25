@@ -54,4 +54,25 @@ RSpec.describe Product, :type => :model do
 
     it_behaves_like "movable to order"
   end
+
+  context "after being reserved" do
+    it "sells itself when reserved in numbers between 1 and #amount" do
+      expect(@product).to receive(:sell)
+      @product.update_attributes(reserve: 5)
+    end
+
+    context "refuses to sell with wrong reserve numbers" do
+      before :each do
+        expect(@product).to_not receive(:sell)
+      end
+
+      it "when sell amount too big" do
+        @product.update_attributes(reserve: 25)
+      end
+
+      it "when sell amount too small" do
+        @product.update_attributes(reserve: 0)
+      end
+    end
+  end
 end
