@@ -16,4 +16,9 @@ class Product < ActiveRecord::Base
   def reserve=(order_amount)
     order order_amount if order_amount.between? 1, amount
   end
+
+  def self.bid
+    # TODO: implement me
+    # create bid and add all products with small amount to bid
+  end
 end
