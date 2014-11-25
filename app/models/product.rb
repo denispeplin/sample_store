@@ -14,6 +14,6 @@ class Product < ActiveRecord::Base
   end
 
   def reserve=(order_amount)
-    order order_amount if order_amount >= 1 and order_amount <= amount
+    order order_amount if order_amount.between? 1, amount
   end
 end
