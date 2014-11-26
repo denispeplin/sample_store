@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20141126062151) do
   end
 
   create_table "list_products", force: true do |t|
+    t.string   "type"
     t.integer  "list_id"
     t.integer  "product_id"
     t.integer  "amount",                             null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20141126062151) do
   add_index "list_products", ["product_id"], name: "index_list_products_on_product_id", using: :btree
 
   create_table "lists", force: true do |t|
+    t.string   "type"
     t.boolean  "done",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"

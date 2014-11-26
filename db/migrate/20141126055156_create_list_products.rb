@@ -1,6 +1,7 @@
 class CreateListProducts < ActiveRecord::Migration
   def change
     create_table :list_products do |t|
+      t.string :type, index: true
       t.references :list, index: true
       t.references :product, index: true
       t.integer :amount, null: false
