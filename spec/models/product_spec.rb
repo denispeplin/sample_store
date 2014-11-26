@@ -75,4 +75,44 @@ RSpec.describe Product, :type => :model do
       end
     end
   end
+
+  describe "adding to bid" do
+    before :each do
+      @products = Product.all
+    end
+
+    context "amount less than minimum" do
+      before :each do
+        @product.update_attributes(amount: 5)
+      end
+
+      it "creates new bid" do
+        expect_any_instance_of(Bid).to receive(:save!)
+        @products.place_bid
+      end
+
+      it "calculates difference between current and min amount" do
+        expect(@product.amount_needed).to be_present
+      end
+
+      it "copies itself to bid with amount" do
+        expect(BidProduct).to receive(:add).with(kind_of(List), @product, 5)
+        @products.place_bid
+      end
+    end
+
+    context "amount bigger than minimum" do
+      after :each do
+        @products.place_bid
+      end
+
+      it "doesn't creates bid" do
+        expect_any_instance_of(Bid).to_not receive(:save!)
+      end
+
+      it "doesn't calls BidProduct#add" do
+        expect(BidProduct).to_not receive(:add)
+      end
+    end
+  end
 end

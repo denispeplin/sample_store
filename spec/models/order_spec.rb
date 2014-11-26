@@ -7,7 +7,7 @@ RSpec.describe Order, :type => :model do
     end
 
     it "calls bid on products" do
-      expect(Product).to receive(:bid)
+      expect(Product).to receive(:place_bid)
       @order.update_attributes(sold: true)
     end
   end

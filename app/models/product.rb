@@ -17,8 +17,22 @@ class Product < ActiveRecord::Base
     order order_amount if order_amount.between? 1, amount
   end
 
-  def self.bid
+  def self.place_bid
+    bid = Bid.new
+    self.all.each do |product|
+      if product.amount_needed
+        transaction do
+          bid.save! if bid.new_record?
+          BidProduct.add(bid, product, product.amount_needed)
+        end
+      end
+    end
     # TODO: implement me
     # create bid and add all products with small amount to bid
+  end
+
+  def amount_needed
+    min_amount = 10 # hardcode for now
+    min_amount - amount if amount < min_amount
   end
 end
