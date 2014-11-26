@@ -5,7 +5,7 @@ class ListProduct < ActiveRecord::Base
   delegate :name, to: :product
 
   def self.add(list, product, amount)
-    create(list_id: list.id, product_id: product.id, price: product.price,
+    create!(list_id: list.id, product_id: product.id, price: product.price,
       amount: amount)
   end
 end
