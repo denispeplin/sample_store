@@ -1,6 +1,7 @@
-class Order < ActiveRecord::Base
-  has_many :order_products
-  has_many :products, through: :order_products
+class Order < List
+  alias_attribute :sold, :done
+  alias_attribute :sold=, :done=
+  has_many :order_products, foreign_key: :list_id
 
   before_save :products_bid, if: lambda { |order| order.sold_changed? and order.sold }
 

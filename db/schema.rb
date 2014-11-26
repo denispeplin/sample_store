@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125070611) do
+ActiveRecord::Schema.define(version: 20141126055156) do
 
   create_table "invoice_products", force: true do |t|
     t.integer  "invoice_id"
@@ -26,6 +26,24 @@ ActiveRecord::Schema.define(version: 20141125070611) do
 
   create_table "invoices", force: true do |t|
     t.boolean  "received",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "list_products", force: true do |t|
+    t.integer  "list_id"
+    t.integer  "product_id"
+    t.integer  "amount",                             null: false
+    t.decimal  "price",      precision: 8, scale: 2, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "list_products", ["list_id"], name: "index_list_products_on_list_id", using: :btree
+  add_index "list_products", ["product_id"], name: "index_list_products_on_product_id", using: :btree
+
+  create_table "lists", force: true do |t|
+    t.boolean  "done",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
