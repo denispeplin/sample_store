@@ -14,6 +14,6 @@ class Order < List
   private
 
   def products_bid
-    products.place_bid
+    products.create_bid
   end
 end

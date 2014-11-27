@@ -88,7 +88,7 @@ RSpec.describe Product, :type => :model do
 
       it "creates new bid" do
         expect_any_instance_of(Bid).to receive(:save!)
-        @products.place_bid
+        @products.create_bid
       end
 
       it "calculates difference between current and min amount" do
@@ -97,13 +97,13 @@ RSpec.describe Product, :type => :model do
 
       it "copies itself to bid with amount" do
         expect(BidProduct).to receive(:add).with(kind_of(List), @product, 5)
-        @products.place_bid
+        @products.create_bid
       end
     end
 
     context "amount bigger than minimum" do
       after :each do
-        @products.place_bid
+        @products.create_bid
       end
 
       it "doesn't creates bid" do

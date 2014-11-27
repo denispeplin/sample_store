@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
     order order_amount if order_amount.between? 1, amount
   end
 
-  def self.place_bid
+  def self.create_bid
     bid = Bid.new
     self.all.each do |product|
       if product.amount_needed
