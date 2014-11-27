@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :bid_product do
     bid nil
     product nil
-    amount 1
-    price "9.99"
+    amount Faker::Number.number(2).to_i
+    price Faker::Commerce::price
   end
 end
