@@ -16,6 +16,6 @@ class BidsController < ApplicationController
   private
 
   def bid_params
-    params.require(:bid).permit(:placed)
+    params.require(:bid).permit(:placed, combine: [])
   end
 end
