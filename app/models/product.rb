@@ -32,8 +32,11 @@ class Product < ActiveRecord::Base
   end
 
   def amount_needed
-    min_amount = min_amount_default # temporary setting
-    min_amount - amount if amount < min_amount
+    min_amount_calculated - amount if amount < min_amount_calculated
+  end
+
+  def min_amount_calculated
+    min_amount || min_amount_default
   end
 
   def min_amount_default

@@ -118,9 +118,19 @@ RSpec.describe Product, :type => :model do
   end
 
   describe "minimum amount calculation" do
-    it "gets minumum amount from settings" do
-      create :setting, name: 'product_min_amount', number: 17
-      expect(@product.min_amount_default).to eq 17
+    context "default minimum amount exists in settings" do
+      before :each do
+        create :setting, name: 'product_min_amount', number: 17
+      end
+
+      it "gets minumum amount from settings" do
+        expect(@product.min_amount_calculated).to eq 17
+      end
+
+      it "gets own minimum amount when present" do
+        @product.update_attributes(min_amount: 7)
+        expect(@product.min_amount_calculated).to eq 7
+      end
     end
 
     it "fallback to 0 if minimum amount hasn't been set" do
