@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :orders,   only: [:index, :update]
   resources :bids,     only: [:index, :update]
   resources :bid_products, only: [:update]
+  resources :settings, only: [:index, :update]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

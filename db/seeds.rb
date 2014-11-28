@@ -15,3 +15,6 @@ invoice = Invoice.create!
     price: Faker::Commerce::price
   )
 end
+
+Setting.find_by_name('product_min_amount') ||
+  Setting.create(name: 'product_min_amount', number: 10)
