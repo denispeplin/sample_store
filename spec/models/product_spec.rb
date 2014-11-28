@@ -83,6 +83,7 @@ RSpec.describe Product, :type => :model do
 
     context "amount less than minimum" do
       before :each do
+        create :setting, name: 'product_min_amount', number: 10
         @product.update_attributes(amount: 5)
       end
 
@@ -113,6 +114,17 @@ RSpec.describe Product, :type => :model do
       it "doesn't calls BidProduct#add" do
         expect(BidProduct).to_not receive(:add)
       end
+    end
+  end
+
+  describe "minimum amount calculation" do
+    it "gets minumum amount from settings" do
+      create :setting, name: 'product_min_amount', number: 17
+      expect(@product.min_amount_default).to eq 17
+    end
+
+    it "fallback to 0 if minimum amount hasn't been set" do
+      expect(@product.min_amount_default).to eq 0
     end
   end
 end

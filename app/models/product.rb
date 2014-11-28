@@ -32,7 +32,11 @@ class Product < ActiveRecord::Base
   end
 
   def amount_needed
-    min_amount = 10 # hardcode for now
+    min_amount = min_amount_default # temporary setting
     min_amount - amount if amount < min_amount
+  end
+
+  def min_amount_default
+    Setting.find_by_name('product_min_amount').try(:number) || 0
   end
 end
