@@ -16,6 +16,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:reserve)
+    params.require(:product).permit(:min_amount, :reserve)
   end
 end

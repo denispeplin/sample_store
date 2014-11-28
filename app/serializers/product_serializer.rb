@@ -1,5 +1,5 @@
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id, :name, :amount, :price, :reserve
+  attributes :id, :name, :min_amount, :amount, :price, :reserve
 
   def reserve
     0

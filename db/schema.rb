@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128052440) do
+ActiveRecord::Schema.define(version: 20141128061927) do
 
   create_table "invoice_products", force: true do |t|
     t.integer  "invoice_id"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141128052440) do
     t.decimal  "price",      precision: 8, scale: 2, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "min_amount"
   end
 
   create_table "settings", force: true do |t|
